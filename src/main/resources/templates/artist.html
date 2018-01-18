@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"/>
+    <title>Artist's Page</title>
+</head>
+<body style="font-family: 'Poiret One', cursive;">
+    <h1 th:text="${artist.name} + '\'s pictures'"></h1>
+    <table class="table">
+        <tr>
+            <th>PICTURE TITLE</th>
+            <th>STATUS</th>
+        </tr>
+        <tr th:each="picture : ${artist.artworks}">
+            <td >
+                <a th:href="${picture.url}" th:text="${picture.title}"/>
+            </td>
+            <td>
+                <span th:style="color:red" th:if="${picture.isSold} == true" th:text="SOLD" />
+                <span th:unless="${picture.isSold} == true" th:text="${picture.price} + ' $'"/>
+            </td>
+            <td>
+                <span th:if="${picture.isSold} == true" th:text="picture.owner" />
+                <span th:unless="${picture.isSold} == true"/>
+            </td>
+        </tr>
+        <tr >
+            <form action="#" th:action="@{/artist/} + ${artist.name}" th:object="${newPicture}" method="post">
+                <td>
+                    <div>
+                        <input type="text" name="title" placeholder="Title..." th:field="*{title}"/>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input type="text" name="price" placeholder="Price..." th:field="*{price}"/>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input type="text" name="url" placeholder="Url..." th:field="*{url}"/>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input class="btn btn-danger" type="submit" value="Add" />
+                    </div>
+                </td>
+            </form>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"/>
+    <title>Costumer's Page</title>
+</head>
+<body style="font-family: 'Poiret One', cursive;">
+    <h1 th:text="${costumer.name} + '\'s pictures'"></h1>
+    <p>Here you see the pictures you bought:</p>
+    <div class="col-xs6 col-md-4" style="padding-left: 0px; padding-right: 0px" th:each="picture : ${costumer.boughtPictures}">
+        <a th:style="font-size: 32px" th:text="${picture.artistName}"></a><br/>
+        <a th:style="font-size: 24px" th:text="${picture.title}"></a><br/>
+        <a href="${picture.url}"><img src="${picture.url}" style="width: 100%" height="auto" class="img-thumbnail"/></a><br/>
+    </div>
+</body>
+</html>

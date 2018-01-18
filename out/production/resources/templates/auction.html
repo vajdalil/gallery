@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"/>
+    <title>Exhibition</title>
+</head>
+<body style="font-family: 'Poiret One', cursive;">
+<h1>ART GALLERY AUCTION</h1>
+<table class="table">
+    <tr>
+        <th>ARTIST</th>
+        <th>PICTURE TITLE</th>
+        <th>PRICE</th>
+    </tr>
+    <tr th:each="picture : ${pictures}">
+        <td th:text="${picture.artistName}"></td>
+        <td>
+            <span th:style="color:red" th:if="${picture.isSold} == true" th:text="${picture.title} + ' is sold!'" />
+            <span th:unless="${picture.isSold} == true" th:text="${picture.title}" />
+        </td>
+        <td th:text="${picture.price} + ' $'"/>
+        <td>
+            <a th:href="${picture.url}">
+                <img th:src="${picture.url}"/>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/artist/} + ${picture.name}" th:text="See Artist"/>
+        </td>
+        <td>
+            <form action="#" th:action="@{/buy}" th:object="${picture}" method="post">
+                <input class="btn btn-danger" type="submit" value="BUY" />
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"/>
+    <title>Artist's Login</title>
+</head>
+<body style="font-family: 'Poiret One', cursive;">
+    <form action="#" th:object="${artist}" th:action="@{/login/artist}" method="post">
+        <label for="artistName">Name: </label>
+        <input id="artistName" name="artistName" type="text" th:field="*{name}"/>
+        <input type="submit" value="Login"/>
+    </form>
+</body>
+</html>

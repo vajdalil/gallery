@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"/>
+    <title>Costumer's Login</title>
+</head>
+<body style="font-family: 'Poiret One', cursive;">
+<form action="#" th:object="${costumer}" th:action="@{/login/costumer}" method="post">
+    <label for="costumerName">Name: </label>
+    <input id="costumerName" name="costumerName" type="text" th:field="*{name}"/>
+    <input type="submit" value="Login"/>
+</form>
+</body>
+</html>
