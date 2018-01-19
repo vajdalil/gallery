@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface ArtistRepository extends CrudRepository<Artist, Long> {
 
-  List <Artist> findArtistByArtworks(Picture picture);
+  Artist findArtistByArtworks(Picture picture);
   Artist findByName (String name);
+  Artist findById (long id);
 }

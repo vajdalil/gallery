@@ -19,4 +19,16 @@ public class PictureService {
       pictureRepository.save(picture);
     }
   }
+
+  public Picture findByTitle (String title) {
+    return pictureRepository.findByTitle(title);
+  }
+
+  public Picture findByID(long id) {
+    return pictureRepository.findOne(id);
+  }
+
+  public void deleteByID(long id) {
+    pictureRepository.deleteById(id);
+  }
 }

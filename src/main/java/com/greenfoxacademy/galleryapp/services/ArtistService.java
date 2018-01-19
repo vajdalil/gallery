@@ -37,6 +37,14 @@ public class ArtistService {
     return  artistRepository.findByName(name);
   }
 
+  public Artist findById (long id) {
+    return artistRepository.findById(id);
+  }
+
+  public Artist findByArtworks(Picture picture) {
+    return artistRepository.findArtistByArtworks(picture);
+  }
+
   public void save(String artistName, Picture picture) {
     Artist artist = artistRepository.findByName(artistName);
     picture.setArtist(artist);

@@ -14,19 +14,18 @@
         background-size: cover;">
     <header style="background: black;
             ">
-        <a th:href="@{/exhibition}" class="card-title" style="font-size: 32px">EXHIBITION</a>
-        <a class="card-title" th:href="@{/auction}"  style="font-size: 32px">AUCTION</a>
         <a class="card-title" th:href="@{/login/costumer}"  style="font-size: 32px">COSTUMER'S PAGE</a>
         <a class="card-title" th:href="@{/login/artist}"  style="font-size: 32px">ARTIST'S PAGE</a>
     </header>
     <main>
         <div>
-            <h1 style="background: gold;
+            <a style="background: gold;
+                color: #000;
                 text-align:center;
                 font-size: 54px"
-                class="col-md-2 col-md-offset-5">
+                class="col-md-2 col-md-offset-5" th:href="@{/exhibition}">
                 LILLA'S ART GALLERY
-            </h1>
+            </a>
         </div>
     </main>
 </body>

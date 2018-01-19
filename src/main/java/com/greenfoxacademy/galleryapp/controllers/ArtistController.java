@@ -8,10 +8,9 @@ import com.greenfoxacademy.galleryapp.services.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ArtistController {
@@ -49,6 +48,29 @@ public class ArtistController {
     artistService.save(name, picture);
     pictureService.savePicture(picture);
     return "redirect:/artist/" + artist.getName();
+  }
+  @GetMapping("/edit/{id}")
+  public String edit(Model model, @PathVariable long id) {
+    Picture picture = pictureService.findByID(id
+    );
+    model.addAttribute("picture", picture);
+    return "exhibition"; //todo itt majd létre kell hozni egy normális edit buttont
+  }
+
+  @PostMapping("/edit/{id}/save")
+  public String editTodo( @ModelAttribute Picture picture, @PathVariable int id) {
+    picture.setId(id);
+    pictureService.savePicture(picture);
+    return "redirect:/artist" + picture.getArtist().getName();
+  }
+
+  @RequestMapping("/delete/{id}")
+  public String delete(Model model, @PathVariable long id) {
+    Picture picture = pictureService.findByID(id);
+    Artist artist = artistService.findByArtworks(picture);
+    model.addAttribute("picture", picture);
+    pictureService.deleteByID(id);
+    return "redirect:/artist" + artist.getName();
   }
 
 }

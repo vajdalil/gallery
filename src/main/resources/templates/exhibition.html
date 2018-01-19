@@ -7,27 +7,37 @@
     <title>Exhibition</title>
 </head>
 <body style="font-family: 'Poiret One', cursive;">
-<h1>ART GALLERY COLLECTION</h1>
-<table class="table">
-    <tr>
-        <th>ARTIST</th>
-        <th>PICTURE TITLE</th>
-    </tr>
-    <tr th:each="picture : ${pictures}">
-        <td th:text="${picture.artistName}"></td>
-        <td>
-            <span th:style="color:red" th:if="${picture.isSold} == true" th:text="${picture.title} + ' is sold!'" />
-            <span th:unless="${picture.isSold} == true" th:text="${picture.title}" />
-        </td>
-        <td>
-            <a th:href="${picture.url}">
-            <img th:src="${picture.url}"/>
-            </a>
-        </td>
-        <td>
-            <a th:href="@{/artist/} + ${picture.name}">See Artist</a>
-        </td>
-    </tr>
-</table>
+    <header style="background: darkred;">
+        <div align="right">
+            <form action="#" th:action="@{/exhibition/search}" th:object="${pictures}" method="post">
+                <input type="text" placeholder="Search.."/>
+                <input type="submit" value="SEARCH"/>
+            </form>
+        </div>
+    </header>
+    <main>
+        <h1>ART GALLERY COLLECTION</h1>
+        <table class="table">
+            <tr>
+                <th>ARTIST</th>
+                <th>PICTURE TITLE</th>
+            </tr>
+            <tr th:each="picture : ${pictures}">
+                <td th:text="${picture.artist.getName()}"></td>
+                <td>
+                    <span th:style="color:red" th:if="${picture.isSold} == true" th:text="${picture.title} + ' is sold!'" />
+                    <span th:unless="${picture.isSold} == true" th:text="${picture.title}" />
+                </td>
+                <td>
+                    <a th:href="${picture.url}">
+                    <img th:src="${picture.url}" width="600px" height="400"/>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/artist/} + ${picture.title}">See Artist</a>
+                </td>
+            </tr>
+        </table>
+    </main>
 </body>
 </html>

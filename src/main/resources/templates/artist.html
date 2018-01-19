@@ -7,7 +7,7 @@
     <title>Artist's Page</title>
 </head>
 <body style="font-family: 'Poiret One', cursive;">
-    <h1 th:text="${artist.name} + '\'s pictures'"></h1>
+    <h1 th:text="${artist.name} + '\'s pictures'"/>
     <table class="table">
         <tr>
             <th>PICTURE TITLE</th>
@@ -24,6 +24,14 @@
             <td>
                 <span th:if="${picture.isSold} == true" th:text="picture.owner" />
                 <span th:unless="${picture.isSold} == true"/>
+            </td>
+            <td>
+                <a th:href="@{/edit/} + ${picture.id}" class="btn btn-danger" type="submit" value="EDIT" />
+            </td>
+            <td>
+                <form action="#" th:action="@{/delete/} + ${picture.id}" th:object="${picture}" method="post">
+                    <button class="btn btn-danger" type="submit" value="DELETE" />
+                </form>
             </td>
         </tr>
         <tr >
