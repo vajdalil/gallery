@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"/>
+    <title>Artist's Page</title>
+</head>
+<body style="font-family: 'Poiret One', cursive;">
+    <h1 th:text="${picture.artist.getName()} + '\'s pictures'"/>
+    <h3 th:text="'Edit ' + ${picture.getTitle()}"/>
+    <form action="#" th:object="${picture}" th:action="@{/edit/} + ${picture.id} + @{/save}"  method="post">
+        <table class="table">
+            <tr>
+                <td>
+                    <label for="title">TITLE</label>
+                </td>
+                <td>
+                    <input id="title" placeholder="${picture.title}" type="text" th:field="${picture.title}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="price">PRICE</label>
+                </td>
+                <td>
+                    <input id="price" placeholder="${picture.price}" type="text" th:field="${picture.price}"/>
+                    <span>$</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="btn btn-danger" type="submit" value="EDIT"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

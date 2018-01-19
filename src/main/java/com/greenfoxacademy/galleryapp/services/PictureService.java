@@ -1,5 +1,6 @@
 package com.greenfoxacademy.galleryapp.services;
 
+import com.greenfoxacademy.galleryapp.models.Artist;
 import com.greenfoxacademy.galleryapp.models.Picture;
 import com.greenfoxacademy.galleryapp.repositories.PictureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,24 @@ public class PictureService {
     }
   }
 
+  public List<Picture> findAll() {
+    return (List<Picture>) pictureRepository.findAll();
+  }
+
   public Picture findByTitle (String title) {
     return pictureRepository.findByTitle(title);
   }
 
   public Picture findByID(long id) {
     return pictureRepository.findOne(id);
+  }
+
+  public List <Picture> findAllByArtistName(String name) {
+   return pictureRepository.findAllByArtist_Name(name);
+  }
+
+  public void delete(long id) {
+    pictureRepository.deleteById(id);
   }
 
   public void deleteByID(long id) {

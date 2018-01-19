@@ -51,24 +51,22 @@ public class ArtistController {
   }
   @GetMapping("/edit/{id}")
   public String edit(Model model, @PathVariable long id) {
-    Picture picture = pictureService.findByID(id
-    );
+    Picture picture = pictureService.findByID(id);
     model.addAttribute("picture", picture);
-    return "exhibition"; //todo itt majd létre kell hozni egy normális edit buttont
+    return "edit";
   }
 
   @PostMapping("/edit/{id}/save")
-  public String editTodo( @ModelAttribute Picture picture, @PathVariable int id) {
+  public String editTodo( @ModelAttribute Picture picture, @PathVariable long id) {
     picture.setId(id);
     pictureService.savePicture(picture);
-    return "redirect:/artist" + picture.getArtist().getName();
+    return "redirect:/artist/" + picture.getArtist().getName();
   }
 
   @RequestMapping("/delete/{id}")
-  public String delete(Model model, @PathVariable long id) {
+  public String delete(@PathVariable long id) {
     Picture picture = pictureService.findByID(id);
     Artist artist = artistService.findByArtworks(picture);
-    model.addAttribute("picture", picture);
     pictureService.deleteByID(id);
     return "redirect:/artist" + artist.getName();
   }

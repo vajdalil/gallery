@@ -12,6 +12,7 @@ import java.util.List;
 public interface PictureRepository extends CrudRepository<Picture, Long> {
 
   List<Picture> findAllByArtist(Artist artist);
+  List<Picture> findAllByArtist_Name (String ArtistName);
   List <Picture> findAllBy(Costumer owner);
   Picture findByTitle (String title);
  void deleteById(long id);

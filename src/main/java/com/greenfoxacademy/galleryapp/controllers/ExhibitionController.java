@@ -1,14 +1,12 @@
 package com.greenfoxacademy.galleryapp.controllers;
 
-import com.greenfoxacademy.galleryapp.models.Artist;
 import com.greenfoxacademy.galleryapp.models.Picture;
-import com.greenfoxacademy.galleryapp.repositories.PictureRepository;
+import com.greenfoxacademy.galleryapp.services.ArtistService;
+import com.greenfoxacademy.galleryapp.services.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,19 +14,21 @@ import java.util.List;
 public class ExhibitionController {
 
   @Autowired
-  PictureRepository pictureRepository;
+  PictureService pictureService;
+  @Autowired
+  ArtistService artistService;
 
-  @GetMapping({"/exhibition"})
-  public String list(Model model) {
-    List<Picture> pictures = (List<Picture>) pictureRepository.findAll();
-    model.addAttribute("pictures", pictures);
-    return "exhibition";
-  }
-
-  @RequestMapping("/exhibition/search")
-  public String search(Model model, @ModelAttribute Artist artist) {
-    List<Picture> pictures = pictureRepository.findAllByArtist(artist);
-    model.addAttribute("pictures", pictures);
+  @GetMapping({"/exhibition"}) // a search functionben az action-nél lesz: @{exhibition}
+  public String list(@RequestParam (value = "search", required = false) String artistName, Model model) { //a valeu="search" a html-ben az input name="search" lesz
+    if (artistName != null) {  // ha nincs search beadva, akkor az mindig null!!!
+      model.addAttribute("searchValue", artistName);
+      model.addAttribute("pictures", pictureService.findAllByArtistName(artistName));
+    }
+    else{
+      List<Picture> pictures = pictureService.findAll();
+      model.addAttribute("pictures", pictures);
+      model.addAttribute("searchValue", "Search...");
+    }
     return "exhibition";
   }
 }

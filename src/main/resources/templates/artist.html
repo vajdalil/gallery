@@ -26,11 +26,11 @@
                 <span th:unless="${picture.isSold} == true"/>
             </td>
             <td>
-                <a th:href="@{/edit/} + ${picture.id}" class="btn btn-danger" type="submit" value="EDIT" />
+                <a th:href="@{/edit/} + ${picture.id}" class="btn btn-danger" type="submit" value="edit">EDIT</a>
             </td>
             <td>
-                <form action="#" th:action="@{/delete/} + ${picture.id}" th:object="${picture}" method="post">
-                    <button class="btn btn-danger" type="submit" value="DELETE" />
+                <form action="#" th:action="@{delete/} + *{id}" th:object="${picture}" method="post">
+                    <button class="btn btn-danger" type="submit" value="delete">DELETE</button>
                 </form>
             </td>
         </tr>
