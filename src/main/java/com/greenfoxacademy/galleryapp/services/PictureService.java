@@ -21,6 +21,10 @@ public class PictureService {
     }
   }
 
+  public void updatePicture (Picture picture) {
+    pictureRepository.save(picture);
+  }
+
   public List<Picture> findAll() {
     return (List<Picture>) pictureRepository.findAll();
   }
@@ -38,10 +42,6 @@ public class PictureService {
   }
 
   public void delete(long id) {
-    pictureRepository.deleteById(id);
-  }
-
-  public void deleteByID(long id) {
     pictureRepository.deleteById(id);
   }
 }

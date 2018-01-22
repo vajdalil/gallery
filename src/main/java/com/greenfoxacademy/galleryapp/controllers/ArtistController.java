@@ -52,22 +52,25 @@ public class ArtistController {
   @GetMapping("/edit/{id}")
   public String edit(Model model, @PathVariable long id) {
     Picture picture = pictureService.findByID(id);
+    Artist artist = artistService.findByArtworks(picture);
     model.addAttribute("picture", picture);
+    model.addAttribute("artist", artist);
     return "edit";
   }
 
   @PostMapping("/edit/{id}/save")
-  public String editTodo( @ModelAttribute Picture picture, @PathVariable long id) {
+  public String editPicture( @ModelAttribute Picture picture, @PathVariable long id) {
     picture.setId(id);
-    pictureService.savePicture(picture);
-    return "redirect:/artist/" + picture.getArtist().getName();
+    Artist artist = artistService.findByArtworks(picture);
+    pictureService.updatePicture(picture);
+    return "redirect:/artist/" + artist.getName();
   }
 
   @RequestMapping("/delete/{id}")
   public String delete(@PathVariable long id) {
     Picture picture = pictureService.findByID(id);
     Artist artist = artistService.findByArtworks(picture);
-    pictureService.deleteByID(id);
+    pictureService.delete(id);
     return "redirect:/artist" + artist.getName();
   }
 

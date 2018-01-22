@@ -7,7 +7,7 @@
     <title>Artist's Page</title>
 </head>
 <body style="font-family: 'Poiret One', cursive;">
-    <h1 th:text="${picture.artist.getName()} + '\'s pictures'"/>
+    <h1 th:text="${artist.getName()} + '\'s pictures'"/>
     <h3 th:text="'Edit ' + ${picture.getTitle()}"/>
     <form action="#" th:object="${picture}" th:action="@{/edit/} + ${picture.id} + @{/save}"  method="post">
         <table class="table">
@@ -16,7 +16,7 @@
                     <label for="title">TITLE</label>
                 </td>
                 <td>
-                    <input id="title" placeholder="${picture.title}" type="text" th:field="${picture.title}"/>
+                    <input id="title" placeholder="${picture.getTitle()}" type="text" th:field="${picture.title}"/>
                 </td>
             </tr>
             <tr>
@@ -24,7 +24,7 @@
                     <label for="price">PRICE</label>
                 </td>
                 <td>
-                    <input id="price" placeholder="${picture.price}" type="text" th:field="${picture.price}"/>
+                    <input id="price" placeholder="${picture.getPrice()}" type="text" th:field="${picture.price}"/>
                     <span>$</span>
                 </td>
             </tr>
