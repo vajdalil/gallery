@@ -38,8 +38,11 @@ public class CostumerService {
     return costumerRepository.findByName(costumerName);
   }
 
-  public void save(String costumerName, Picture picture) {
+  public void buyPicture(String costumerName, Picture picture) {
     Costumer costumer = costumerRepository.findByName(costumerName);
     picture.setOwner(costumer);
+    picture.setIsSold(true);
+    costumer.getBoughtPictures().add(picture);
   }
+
 }

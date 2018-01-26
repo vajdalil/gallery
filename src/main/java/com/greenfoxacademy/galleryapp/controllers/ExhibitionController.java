@@ -19,7 +19,7 @@ public class ExhibitionController {
   ArtistService artistService;
 
   @GetMapping({"/exhibition"}) // a search functionben az action-nél lesz: @{exhibition}
-  public String list(@RequestParam (value = "search", required = false) String artistName, Model model) { //a valeu="search" a html-ben az input name="search" lesz
+  public String list(@RequestParam (value = "search", required = false) String artistName, Model model) { //a value="search" a html-ben az input name="search" lesz
     if (artistName != null) {  // ha nincs search beadva, akkor az mindig null!!!
       model.addAttribute("searchValue", artistName);
       model.addAttribute("pictures", pictureService.findAllByArtistName(artistName));

@@ -18,7 +18,7 @@
                 <a th:href="${picture.url}" th:text="${picture.title}"/>
             </td>
             <td>
-                <span th:style="color:red" th:if="${picture.isSold} == true" th:text="SOLD" />
+                <span style="color:red" th:if="${picture.isSold} == true" th:text="SOLD" />
                 <span th:unless="${picture.isSold} == true" th:text="${picture.price} + ' $'"/>
             </td>
             <td>
@@ -29,8 +29,8 @@
                 <a th:href="@{/edit/} + ${picture.id}" class="btn btn-danger" type="submit" value="edit">EDIT</a>
             </td>
             <td>
-                <form action="#" th:action="@{delete/} + *{id}" th:object="${picture}" method="post">
-                    <button class="btn btn-danger" type="submit" value="delete">DELETE</button>
+                <form action="#" th:action="@{/delete/} + *{id}" th:object="${picture}" method="post">
+                    <input class="btn btn-danger" type="submit" value="DELETE"/>
                 </form>
             </td>
         </tr>
@@ -53,7 +53,7 @@
                 </td>
                 <td>
                     <div>
-                        <input class="btn btn-danger" type="submit" value="Add" />
+                        <input class="btn btn-danger" type="submit" value="ADD" />
                     </div>
                 </td>
             </form>

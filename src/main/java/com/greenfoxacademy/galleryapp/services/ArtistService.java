@@ -11,6 +11,8 @@ public class ArtistService {
 
   @Autowired
   ArtistRepository artistRepository;
+  @Autowired
+  PictureService pictureService;
 
   public ArtistService() {
 
@@ -27,6 +29,13 @@ public class ArtistService {
 
   private void registerArtist(Artist artist) {
     artistRepository.save(artist);
+  }
+
+  public boolean addPicture(int id, Picture picture) {
+    Artist artist = artistRepository.findById(id);
+    artist.addPictureToArtworks(picture);
+    pictureService.savePicture(picture);
+    return true;
   }
 
   public List<Artist> findAll() {

@@ -1,9 +1,12 @@
 package com.greenfoxacademy.galleryapp.models;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 @Entity
 public class Artist {
 
@@ -11,7 +14,7 @@ public class Artist {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private String name;
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Picture> artworks;
 
   public Artist() {
@@ -44,6 +47,14 @@ public class Artist {
 
   public void setArtworks(List<Picture> artworks) {
     this.artworks = artworks;
+  }
+
+  public void deleteArtwork(Picture picture) {
+  }
+
+  public void addPictureToArtworks(Picture picture) {
+    picture.setArtist(this);
+    artworks.add(picture);
   }
 
   @Override

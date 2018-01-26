@@ -7,7 +7,7 @@
     <title>Artist's Page</title>
 </head>
 <body style="font-family: 'Poiret One', cursive;">
-    <h1 th:text="${artist.getName()} + '\'s pictures'"/>
+    <h1 th:text="${picture.getArtist().getName()} + '\'s pictures'"/>
     <h3 th:text="'Edit ' + ${picture.getTitle()}"/>
     <form action="#" th:object="${picture}" th:action="@{/edit/} + ${picture.id} + @{/save}"  method="post">
         <table class="table">
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td>
-                    <input class="btn btn-danger" type="submit" value="EDIT"/>
+                    <input th:unless="${isSold} == false" class="btn btn-danger" type="submit" value="EDIT"/>
                 </td>
             </tr>
         </table>

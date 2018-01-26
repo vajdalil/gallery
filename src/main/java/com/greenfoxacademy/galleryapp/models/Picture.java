@@ -92,5 +92,4 @@ public class Picture {
 
     return this.getTitle().equals(picture.getTitle());
   }
-
 }

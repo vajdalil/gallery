@@ -15,5 +15,5 @@ public interface PictureRepository extends CrudRepository<Picture, Long> {
   List<Picture> findAllByArtist_Name (String ArtistName);
   List <Picture> findAllBy(Costumer owner);
   Picture findByTitle (String title);
- void deleteById(long id);
+  void deleteById(long id);
 }

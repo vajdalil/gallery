@@ -13,6 +13,10 @@ public class PictureService {
 
   @Autowired
   PictureRepository pictureRepository;
+  @Autowired
+  Artist artist;
+  @Autowired
+  ArtistService artistService;
 
   public void savePicture(Picture picture) {
     List<Picture> pictures = (List<Picture>) pictureRepository.findAll();
@@ -42,6 +46,10 @@ public class PictureService {
   }
 
   public void delete(long id) {
-    pictureRepository.deleteById(id);
+    Picture picture = pictureRepository.findOne(id);
+    Artist artist = artistService.findByArtworks(picture);
+    artist.getArtworks().remove(picture);
+    pictureRepository.delete(picture);
   }
+
 }

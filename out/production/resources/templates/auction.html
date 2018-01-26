@@ -24,11 +24,8 @@
                 <th>PRICE</th>
             </tr>
             <tr th:each="picture : ${pictures}">
-                <td th:text="${picture.artist.getName()}"></td>
-                <td>
-                    <span th:style="color:red" th:if="${picture.isSold} == true" th:text="${picture.title} + ' is sold!'" />
-                    <span th:unless="${picture.isSold} == true" th:text="${picture.title}" />
-                </td>
+                <td th:text="${picture.artist.name}"/>
+                <td th:text="${picture.title}"/>
                 <td th:text="${picture.price} + ' $'"/>
                 <td>
                     <a th:href="${picture.url}">
@@ -36,7 +33,7 @@
                     </a>
                 </td>
                 <td>
-                    <form action="#" th:action="@{/buy/}" th:object="${picture}" method="post">
+                    <form action="#" th:action="@{/buy/} + ${costumer.name}" th:object="${picture}" method="get">
                         <input class="btn btn-danger" type="submit" value="BUY" />
                     </form>
                 </td>
