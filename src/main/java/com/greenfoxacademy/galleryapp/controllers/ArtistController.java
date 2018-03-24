@@ -41,8 +41,6 @@ public class ArtistController {
     return "artist";
   }
 
-  //todo error handling: no title is given, no price, no url
-
   @PostMapping("/artist/{name}")
   public String createNewPicture(Model model, @PathVariable String name, Picture picture) {
     Artist artist = artistService.findbyName(name);
@@ -51,8 +49,6 @@ public class ArtistController {
     pictureService.savePicture(picture);
     return "redirect:/artist/" + artist.getName();
   }
-
-  //todo error handling: no title is given or no price
 
   @GetMapping("/edit/{id}")
   public String edit(Model model, @PathVariable long id) {
